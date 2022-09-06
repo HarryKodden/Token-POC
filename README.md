@@ -2,6 +2,7 @@
 
 Introduction
 
+```uml
 <!--
 @startuml assets/ResearchCloud
 
@@ -47,7 +48,7 @@ XYZ <-- SRAM: user details
 end
 
 @enduml
-
 -->
+```
 
 ![ResearchCloud](assets/ResearchCloud.svg)
