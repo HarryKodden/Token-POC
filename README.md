@@ -1,4 +1,4 @@
-# README
+# Provisioning Flow
 
 <!---
 @startuml assets/ResearchCloud
@@ -48,3 +48,11 @@ end
 -->
 
 ![ResearchCloud](assets/ResearchCloud.svg)
+
+## Note for contribution
+
+Please update diagram before commit & push to repostitory:
+
+```shell
+plantuml -tsvg README.md
+```
