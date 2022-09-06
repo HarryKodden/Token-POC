@@ -1,9 +1,6 @@
 # README
 
-Introduction
-
-```uml
-<!--
+<!---
 @startuml assets/ResearchCloud
 
 title "ResearchCloud Provisioning Services"
@@ -48,7 +45,6 @@ XYZ <-- SRAM: user details
 end
 
 @enduml
--->
-```
+--->
 
 ![ResearchCloud](assets/ResearchCloud.svg)
