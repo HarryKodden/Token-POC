@@ -18,29 +18,30 @@ end
 
 group Obtain Refresh token for Service XYZ
 user -> SRC: connect to XYZ
-SRC -> SRAM: /oidc/device_authorization client_id=XYZ, scope=openid+offline_access
-SRC <- SRAM: device_code="xxx", verification=https://...
-SRC -> SRAM: /oidc/token device_code="xxx"
+SRC -> SRAM: **/oidc/device_authorization**\nclient_id=XYZ\nscope=openid+offline_access
+SRC <- SRAM: device_code="xxx"\nverification_link=https://...
+user <- SRC: Present verification link to user
+SRC -> SRAM: **/oidc/token**\ngrant_type=device_token\ndevice_code="xxx"
 SRC <- SRAM: pending...
-user -> SRAM: using verification link
+user -> SRAM: click verification link
 user <- SRAM: Authenticate + Consent
 user -> SRAM: Accepted !
-SRC -> SRAM: /oidc/token grant_type=device_token, device_code="xxx"
+SRC -> SRAM: **/oidc/token**\ngrant_type=device_token\ndevice_code="xxx"
 
-SRC <- SRAM: access_token="aaa", refresh_token="rrr"
+SRC <- SRAM: id_token="iii"\naccess_token="aaa"\nrefresh_token="rrr"
 group repeatable...
-SRC -> SRAM: /oidc/token grant_type=refresh_token, refresh_token="rrr"
-SRC <- SRAM: access_token="aaa", refresh_token="rrr"
+SRC -> SRAM: **/oidc/token**\ngrant_type=refresh_token\nrefresh_token="rrr"
+SRC <- SRAM: id_token="iii"\naccess_token="aaa"\nrefresh_token="rrr"
 end
 end
 
 group Provision/Refresh workspace connected to XYZ
-SRC -> XYZ: Provision, pass access_token "aaa"
+SRC -> XYZ: Provision service\npass access_token "aaa"
 end
 
 group XYZ
-user -> XYZ
-XYZ -> SRAM: /oidc/userinfo access_token="aaa"
+user -> XYZ: User connects to service...
+XYZ -> SRAM: **/oidc/userinfo**\naccess_token="aaa"
 XYZ <- SRAM: user details
 end
 
