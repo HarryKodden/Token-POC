@@ -16,8 +16,12 @@ user -> SRAM: Authenticate
 SRC <- SRAM: Access Token (SRC)
 end
 
-group Obtain Refresh token for Service XYZ
-user -> SRC: connect to XYZ
+group Connect to Service ...
+user -> SRC: Connect with a service...
+SRC -> SRAM: GET /api/services/mine
+SRC <- SRAM: Response with all services available to user
+user <- SRC: Show services
+user -> SRC: Select service **XYZ**
 SRC -> SRAM: **/oidc/device_authorization**\nclient_id=XYZ\nscope=openid+offline_access
 SRC <- SRAM: device_code="xxx"\nverification_link=https://...
 user <- SRC: Present verification link to user
