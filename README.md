@@ -31,15 +31,13 @@ user -> SRAM: click verification link
 user <- SRAM: Authenticate + Consent
 user -> SRAM: Accepted !
 SRC -> SRAM: **/oidc/token**\ngrant_type=device_token\ndevice_code="xxx"
-
 SRC <- SRAM: id_token="iii"\naccess_token="aaa"\nrefresh_token="rrr"
-group repeatable...
+user <- SRC: All set ! You have succesfully connected to service **XYZ**
+end
+
+group [repeatable] Provision/Refresh workspace connected to XYZ
 SRC -> SRAM: **/oidc/token**\ngrant_type=refresh_token\nrefresh_token="rrr"
 SRC <- SRAM: id_token="iii"\naccess_token="aaa"\nrefresh_token="rrr"
-end
-end
-
-group Provision/Refresh workspace connected to XYZ
 SRC -> XYZ: Provision service\npass access_token "aaa"
 end
 
