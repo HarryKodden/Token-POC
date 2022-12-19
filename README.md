@@ -1,4 +1,4 @@
-# Provisioning Flow
+# ResearchCloud Provisioning Flow
 
 <!---
 @startuml assets/ResearchCloud
@@ -51,6 +51,39 @@ end
 -->
 
 ![ResearchCloud](assets/ResearchCloud.svg)
+
+# SRAM Personal Token flow
+
+<!---
+@startuml assets/SRAM
+
+title "SRAM Personal Token"
+
+actor user
+participant SRAM
+
+group Create Personal Token for a targeted Service in SRAM
+user -> SRAM: Logon to "SRAM"
+user -> SRAM: Authenticate
+user <- SRAM: Authenticated !
+user -> SRAM: Select CO
+user <- SRAM: CO is presented
+user -> SRAM: Select Tokens / Create Token for service **XYZ**
+user <-- SRAM: Token is one-time-presented, \nUser should copy/save that token, sram stores a hash value
+end
+
+group Use a Personal Token in Service **XYZ**
+user -> XYZ: User connects to Service XYZ\nCredentials\n- Username: SRAM UID\n- Password: Personal Token value
+XYZ -> SRAM: POST "https://sram.surf.nl/api/tokens/introspect"\nbearer: XYZ-Secret\npayload: { "token": "<Personal Token Value>" }
+XYZ <-- SRAM: 200 OK + User Details
+XYZ <-- XYZ: Verify that User Details / Username == provided Username
+user <-- XYZ: Access is granted
+end
+
+@enduml
+-->
+
+![ResearchCloud](assets/SRAM.svg)
 
 ## Note for contribution
 
