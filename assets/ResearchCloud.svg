@@ -42,7 +42,7 @@ end
 group XYZ
 user -> XYZ: User connects to service...
 XYZ -> SRAM: **/oidc/userinfo**\naccess_token="aaa"
-XYZ <- SRAM: user details
+XYZ <- SRAM: **user details**\nuser_email="user@org.nl"\nuser_eppn="12345"\nuser_co="org/myCO"\nconnecting_service="ResearchCloud"
 end
 
 @enduml
